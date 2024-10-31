@@ -31,6 +31,8 @@ class DeviceController extends Controller
         return response()->json(['response_code' => 200]);
     }
 
+
+
     public function devices(Request $request)
     {
 
