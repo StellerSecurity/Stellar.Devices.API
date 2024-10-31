@@ -4,7 +4,8 @@ namespace App\Http\Controllers\V1;
 
 use App\Http\Controllers\Controller;
 use App\Models\DeviceLogin;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
+
 
 class DeviceController extends Controller
 {
