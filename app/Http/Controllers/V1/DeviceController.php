@@ -19,7 +19,7 @@ class DeviceController extends Controller
             return response()->json(['response_code' => 400, 'response_message' => 'Name or Identifier cannot be empty.']);
         }
 
-        $deviceLogin = DeviceLogin::add($request->only(['identifier', 'name']));
+        $deviceLogin = DeviceLogin::create($request->only(['identifier', 'name']));
 
         return response()->json($deviceLogin);
 
