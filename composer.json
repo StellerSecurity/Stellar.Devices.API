@@ -15,7 +15,7 @@
         }
     ],
     "require": {
-        "php": "^8.2",
+        "php": "^8.1",
         "mondago/laravel-application-insights": "^0.7.0",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^10.10",
