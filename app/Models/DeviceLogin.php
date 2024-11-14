@@ -15,4 +15,6 @@ class DeviceLogin extends Model
 
     protected $fillable = ['identifier', 'name'];
 
+    public $timestamps = false;
+
 }
