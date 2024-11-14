@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Mockery\Mock;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
 class DeviceLogin extends Model
 {
+
+    use HasUuids;
 
     protected $table = 'devices';
 
