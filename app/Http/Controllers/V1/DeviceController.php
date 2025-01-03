@@ -4,12 +4,18 @@ namespace App\Http\Controllers\V1;
 
 use App\Http\Controllers\Controller;
 use App\Models\DeviceLogin;
+use App\Services\DeviceService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 
 class DeviceController extends Controller
 {
+
+    public function __construct(private DeviceService $deviceService)
+    {
+
+    }
 
     public function add(Request $request): JsonResponse
     {
@@ -19,6 +25,12 @@ class DeviceController extends Controller
 
         if($identifier === null || $name === null) {
             return response()->json(['response_code' => 400, 'response_message' => 'Name or Identifier cannot be empty.']);
+        }
+
+        $device = $this->deviceService->findByIdentifierAndName($identifier, $name);
+
+        if($device !== null) {
+            return response()->json(['response_code' => 400, 'response_message' => 'Device (identifier, name) already exists. Please try another combination.']);
         }
 
         $deviceLogin = DeviceLogin::create($request->only(['identifier', 'name']));
@@ -37,7 +49,7 @@ class DeviceController extends Controller
             return response()->json(['response_code' => 400, 'response_message' => 'Name or Identifier cannot be empty.']);
         }
 
-        $device = DeviceLogin::where([['identifier', '=', $identifier], ['name', '=', $name]])->first();
+        $device = $this->deviceService->findByIdentifierAndName($identifier, $name);
 
         if($device === null) {
             return response()->json(['response_code' => 400, 'response_message' => 'Device not found.']);
