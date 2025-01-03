@@ -71,7 +71,7 @@ class DeviceController extends Controller
             return response()->json(['response_code' => 400, 'response_message' => 'Identifier cannot be empty.']);
         }
 
-        $deviceLogins = DeviceLogin::where('identifier', $identifier)->get();
+        $deviceLogins = $this->deviceService->findByIdentifier($identifier);
         return response()->json($deviceLogins);
 
     }

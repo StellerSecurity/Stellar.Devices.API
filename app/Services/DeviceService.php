@@ -13,4 +13,9 @@ class DeviceService
         return $device;
     }
 
+    public function findByIdentifier(string $identifier) {
+        $deviceLogins = DeviceLogin::where('identifier', $identifier)->get();
+        return $deviceLogins;
+    }
+
 }
