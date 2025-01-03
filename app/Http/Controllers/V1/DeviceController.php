@@ -37,7 +37,7 @@ class DeviceController extends Controller
             return response()->json(['response_code' => 400, 'response_message' => 'Name or Identifier cannot be empty.']);
         }
 
-        $device = DeviceLogin::where([['identifier', '=', $identifier], ['name', '=', $name]]);
+        $device = DeviceLogin::where([['identifier', '=', $identifier], ['name', '=', $name]])->first();
 
         if($device === null) {
             return response()->json(['response_code' => 400, 'response_message' => 'Device not found.']);
