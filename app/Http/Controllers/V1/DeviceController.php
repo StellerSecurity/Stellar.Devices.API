@@ -72,6 +72,11 @@ class DeviceController extends Controller
         }
 
         $deviceLogins = $this->deviceService->findByIdentifier($identifier);
+
+        if($deviceLogins === null) {
+            return response()->json(['response_code' => 400, 'response_message' => 'No device logins found.']);
+        }
+
         return response()->json($deviceLogins);
 
     }
