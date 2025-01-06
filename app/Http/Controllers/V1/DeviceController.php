@@ -30,7 +30,7 @@ class DeviceController extends Controller
         $device = $this->deviceService->findByIdentifierAndName($identifier, $name);
 
         if($device !== null) {
-            return response()->json(['response_code' => 400, 'response_message' => 'Device (identifier, name) already exists. Please try another combination.']);
+            return response()->json(['response_code' => 409, 'response_message' => 'Device (identifier, name) already exists. Please try another combination.']);
         }
 
         $deviceLogin = DeviceLogin::create($request->only(['identifier', 'name']));
