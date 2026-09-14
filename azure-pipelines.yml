@@ -32,6 +32,18 @@ stages:
     pool:
       vmImage: $(vmImageName)
     steps:
+    - checkout: self
+      fetchDepth: 0
+      persistCredentials: false
+
+    - script: |
+        set -eu
+        test ! -e composer.lock
+        git show 42e244efd70ded8b76342d1625979e310a6db78c:composer.lock > composer.lock
+        test "$(git hash-object composer.lock)" = "f895e34bda231361f559982112cbcd8c010809cf"
+      workingDirectory: $(rootFolder)
+      displayName: 'Use reviewed dependency lock from repository history'
+
     - script: |
         sudo update-alternatives --set php /usr/bin/php$(phpVersion)
         sudo update-alternatives --set phar /usr/bin/phar$(phpVersion)
